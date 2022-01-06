@@ -5,8 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MsTeamsBot
-{
+namespace MsTeamsBot {
     [JsonObject]
     public class Embed
     {
