@@ -26,8 +26,6 @@ namespace MsTeamsBot
             ES_CONTINUOUS = 0x80000000,
             ES_DISPLAY_REQUIRED = 0x00000002,
             ES_SYSTEM_REQUIRED = 0x00000001
-            // Legacy flag, should not be used.
-            // ES_USER_PRESENT = 0x00000004
         }
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
@@ -122,7 +120,6 @@ namespace MsTeamsBot
             bool hasJoined = await JoinClass(c);
             if (!hasJoined) throw new UnhandledAlertException();
             DateTime joinDate = DateTime.Now;
-            //wait for teacher to enter call
             bool TeacherIsInclass;
             for(; ; )
             {
@@ -134,7 +131,6 @@ namespace MsTeamsBot
                     break;
                 }
             }
-            //when teacher has entered call, and when the teacher left and 1 min passed, leave call.
             for (; ; )
             {
                 TeacherIsInclass = IsTeacherPresent(c.Teacher);
@@ -147,7 +143,6 @@ namespace MsTeamsBot
         }
         static async Task<bool> hangUpcall()
         {
-            //hang up call func
             try
             {
                 var ShowParticipants = driver.FindElementByXPath(GetID("id", "hangup-button"));
@@ -163,7 +158,6 @@ namespace MsTeamsBot
         }
         static bool IsTeacherPresent(string teacherName)
         {
-            //Function to check whether the teacher is among the participants
             int i = 0;
             checkagain:
             try
@@ -192,19 +186,18 @@ namespace MsTeamsBot
         }
         static async Task<bool> Login()
         {
-            //Login function
             string[] CREDS = { Email, Password };
             var emailField = driver.FindElementByXPath(GetID("id", "i0116"));
             var btn1 = driver.FindElementByXPath(GetID("id", "idSIButton9"));
             emailField.Click();
             emailField.SendKeys(CREDS[0]);
-            btn1.Click(); //Next button
+            btn1.Click();
             await Task.Delay(5000);
             var passField = driver.FindElementByXPath(GetID("id", "i0118"));
             passField.Click();
             passField.SendKeys(CREDS[1]);
             var btn2 = driver.FindElementById("idSIButton9");
-            btn2.Click(); //#Sign in button
+            btn2.Click();
             await Task.Delay(5000);
 
             driver.FindElementById("idSIButton9").Click();  //remember login
@@ -304,7 +297,7 @@ namespace MsTeamsBot
             return true;
         }
 
-        static async Task<bool> GetAllClasses() //Get Class Schedule from calendar
+        static async Task<bool> GetAllClasses()
         {
             sched = new List<ClassSchedule>();
             await ClickCalendar();
