@@ -40,14 +40,10 @@ namespace MsTeamsBot
         static string userID = "Discord UserID"; //Discord UserID for Ping (optional)
         static string Webhook = "Discord Webhook link"; //Discord webhook link (Optional)
         static bool SendlogstoDiscord = false; //Send bot activity to discord
-        static void Main(string[] args)
-        {
-            //CursedSheep was here ;D
-            SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_AWAYMODE_REQUIRED
-| EXECUTION_STATE.ES_CONTINUOUS | EXECUTION_STATE.ES_SYSTEM_REQUIRED); //Prevent computer from sleeping
+        static void Main(string[] args) {
+            SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_AWAYMODE_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS | EXECUTION_STATE.ES_SYSTEM_REQUIRED);
             Console.ForegroundColor = ConsoleColor.Green;
             Task.Factory.StartNew(RunTaskThread);
-
             Thread.Sleep(Timeout.Infinite);
         }
         static async void LogMessage(string Message)
