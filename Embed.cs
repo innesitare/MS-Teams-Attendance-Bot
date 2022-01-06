@@ -28,7 +28,6 @@ namespace MsTeamsBot {
         public string icon_url;
     }
 
-    [JsonObject]
     public class Field
     {
         public string name;
