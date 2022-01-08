@@ -342,6 +342,7 @@ namespace MsTeamsBot
             }
             return true;
         }
+        
         static async Task<bool> ClickCalendar()
         {
             calendarBtn = driver.FindElementByXPath(GetID("id", "app-bar-ef56c0de-36fc-4ef8-b417-3d82ba9d073c"));
